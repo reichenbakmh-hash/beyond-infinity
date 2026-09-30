@@ -34,3 +34,24 @@ export function saveChoice(v) {
 export function resolveLevel(choice) {
   return LEVELS[choice === 'auto' ? detectQuality() : choice];
 }
+
+export const EXPOSURES = [
+  { label: 'normale', value: 1.15 },
+  { label: 'claire', value: 1.6 },
+  { label: 'très claire', value: 2.1 }
+];
+
+export function savedExposure() {
+  try {
+    const v = parseInt(localStorage.getItem('b11.b'), 10);
+    return v >= 0 && v < EXPOSURES.length ? v : 0;
+  } catch {
+    return 0;
+  }
+}
+
+export function saveExposure(v) {
+  try {
+    localStorage.setItem('b11.b', String(v));
+  } catch {}
+}

@@ -36,6 +36,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
   outline: none;
 }
 
+#vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 46%, rgba(0, 0, 0, 0) 52%, rgba(2, 3, 8, 0.62) 100%);
+}
+
 #intro {
   position: fixed;
   inset: 0;

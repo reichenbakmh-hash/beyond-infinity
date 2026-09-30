@@ -69,7 +69,7 @@ export const roomInteractions = [
     model: 'cat',
     label: 'Chat',
     at: [-3.85, 1.15, -1.7],
-    place: [-3.86, 1.04, -1.7],
+    place: [-3.86, 1.01, -1.7],
     rotY: 1.5708,
     radius: 2.6,
     requires: 'phoneDone',

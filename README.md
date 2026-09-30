@@ -10,7 +10,16 @@ Prototype de la première scène : compteur 00:10:57 → 00:11, pièce nocturne 
 Ouvrir l'adresse affichée (le réseau local est exposé, donc testable depuis le téléphone).
 Forcer un niveau graphique : `?q=low`, `?q=medium` ou `?q=high`.
 
-## Déployer sur Cloudflare Pages
+## Déployer sur GitHub Pages (automatique)
+
+Le dossier `.github/workflows/deploy.yml` construit et publie le site à chaque `git push` sur `main`. Étape unique à faire une fois :
+
+1. Sur GitHub, dans le repo : Settings > Pages > Build and deployment > Source > **GitHub Actions**.
+2. `git push`. Onglet Actions : suivre le déploiement. Le site est en ligne une fois le workflow vert.
+
+Important : ne jamais mettre en ligne le dossier `src/` tel quel (ex : en le poussant directement comme contenu du site). Le navigateur ne peut pas exécuter ce code sans l'étape de build — le site apparaît alors sans aucun style. Seul le contenu du dossier `dist/`, généré par `npm run build`, doit être servi.
+
+## Déployer sur Cloudflare Pages (alternative)
 
 Depuis GitHub : Workers & Pages > Create > Pages > Connect to Git.
 

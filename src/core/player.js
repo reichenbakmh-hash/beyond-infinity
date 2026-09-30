@@ -50,11 +50,11 @@ export function createPlayer({ camera, input, colliders, bounds, audio, spawn })
   }
 
   function update(dt, active) {
+    const l = input.consumeLook();
     if (script) {
       runScript(dt);
       return;
     }
-    const l = input.consumeLook();
     let tx = 0;
     let tz = 0;
     if (active) {

@@ -4,15 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#05060a">
+  <meta name="color-scheme" content="dark">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/src/style.css">
   <title>00:11</title>
 </head>
 <body>
   <canvas id="view"></canvas>
+  <div id="vignette"></div>
 
   <div id="hud">
     <div id="dot"></div>
@@ -63,6 +67,7 @@
       <button class="opt" id="m-resume" type="button">Reprendre</button>
       <button class="opt" id="m-sound" type="button">Son : actif</button>
       <button class="opt" id="m-music" type="button" hidden>Musique : non</button>
+      <button class="opt" id="m-bright" type="button">Luminosité : normale</button>
       <button class="opt" id="m-quality" type="button">Qualité : auto</button>
       <button class="opt" id="m-full" type="button" hidden>Plein écran</button>
       <button class="opt dim" id="m-restart" type="button">Recommencer</button>

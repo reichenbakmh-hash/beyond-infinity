@@ -12,7 +12,7 @@ const mesh = (geo, mat, x = 0, y = 0, z = 0) => {
 export function buildPhone() {
   const g = new THREE.Group();
   const body = mesh(new THREE.BoxGeometry(0.072, 0.008, 0.152), lam(0x0e1014));
-  const screenMat = new THREE.MeshBasicMaterial({ map: tex.phoneScreen(), toneMapped: false });
+  const screenMat = new THREE.MeshBasicMaterial({ map: tex.phoneScreen(), toneMapped: false, fog: false });
   const screen = mesh(new THREE.PlaneGeometry(0.066, 0.146), screenMat, 0, 0.0045, 0);
   screen.rotation.x = -Math.PI / 2;
   g.add(body, screen);
@@ -85,7 +85,7 @@ export function buildCat() {
 
 export function buildClock() {
   const g = new THREE.Group();
-  const faceMat = new THREE.MeshBasicMaterial({ map: tex.clockFace(), toneMapped: false });
+  const faceMat = new THREE.MeshBasicMaterial({ map: tex.clockFace(), toneMapped: false, fog: false });
   g.add(mesh(new THREE.BoxGeometry(0.56, 0.22, 0.05), lam(0x0b0b0e)));
   g.add(mesh(new THREE.PlaneGeometry(0.5, 0.176), faceMat, 0, 0, 0.0255));
   g.userData.faceMat = faceMat;
@@ -94,7 +94,7 @@ export function buildClock() {
 
 export function buildDoor() {
   const g = new THREE.Group();
-  const wood = lam(0x1a1512);
+  const wood = lam(0x2a221c);
   const w = 0.98;
   const h = 2.12;
   const t = 0.09;
@@ -103,12 +103,13 @@ export function buildDoor() {
     transparent: true,
     opacity: 0,
     toneMapped: false,
-    depthWrite: false
+    depthWrite: false,
+    fog: false
   });
   const pivot = new THREE.Group();
   pivot.position.set(-w / 2, 0, 0.02);
   pivot.add(
-    mesh(new THREE.BoxGeometry(w - 0.02, h - 0.02, 0.045), lam(0x241c17), (w - 0.02) / 2, h / 2, 0),
+    mesh(new THREE.BoxGeometry(w - 0.02, h - 0.02, 0.045), lam(0x3a2d25), (w - 0.02) / 2, h / 2, 0),
     mesh(new THREE.SphereGeometry(0.03, 10, 8), lam(0x9a8a6c), w - 0.1, h * 0.48, 0.04)
   );
   g.add(

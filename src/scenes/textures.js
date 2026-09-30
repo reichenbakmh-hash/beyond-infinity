@@ -24,11 +24,11 @@ export function floorTexture(size) {
       const r = rng(11);
       const n = 6;
       const w = s / n;
-      g.fillStyle = '#2b2119';
+      g.fillStyle = '#3a2c22';
       g.fillRect(0, 0, s, s);
       for (let i = 0; i < n; i++) {
-        const v = Math.floor(30 + r() * 16);
-        g.fillStyle = `rgb(${v + 14},${v + 5},${v - 6})`;
+        const v = Math.floor(44 + r() * 18);
+        g.fillStyle = `rgb(${v + 22},${v + 9},${v - 2})`;
         g.fillRect(i * w, 0, w - 1.5, s);
         for (let k = 0; k < 26; k++) {
           g.fillStyle = `rgba(0,0,0,${0.03 + r() * 0.05})`;
@@ -47,7 +47,7 @@ export function wallTexture(size) {
     size,
     (g, s) => {
       const r = rng(5);
-      g.fillStyle = '#1a1d29';
+      g.fillStyle = '#333a52';
       g.fillRect(0, 0, s, s);
       const count = (s * s) / 60;
       for (let i = 0; i < count; i++) {
@@ -107,7 +107,8 @@ export function phoneScreen() {
   g.fillText('1 oct.', 64, 112);
   g.fillStyle = 'rgba(255,255,255,0.13)';
   g.beginPath();
-  g.roundRect(14, 176, 100, 34, 9);
+  if (g.roundRect) g.roundRect(14, 176, 100, 34, 9);
+  else g.rect(14, 176, 100, 34);
   g.fill();
   g.fillStyle = 'rgba(255,255,255,0.4)';
   g.fillRect(24, 187, 58, 4);
@@ -148,4 +149,23 @@ export function markerTexture() {
   g.fillStyle = grad;
   g.fillRect(0, 0, 64, 64);
   return new THREE.CanvasTexture(c);
+}
+
+export function patchTexture() {
+  const c = document.createElement('canvas');
+  c.width = 128;
+  c.height = 128;
+  const g = c.getContext('2d');
+  for (let i = 0; i < 8; i++) {
+    g.fillStyle = 'rgba(255,255,255,0.13)';
+    const inset = 6 + i * 4;
+    g.fillRect(inset, inset, 128 - inset * 2, 128 - inset * 2);
+  }
+  g.globalCompositeOperation = 'destination-out';
+  g.fillStyle = 'rgba(0,0,0,0.9)';
+  g.fillRect(62, 0, 4, 128);
+  g.fillRect(0, 62, 128, 4);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
 }

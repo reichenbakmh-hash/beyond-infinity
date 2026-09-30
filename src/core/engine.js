@@ -8,7 +8,7 @@ export function createEngine(canvas, level) {
   });
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.15;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.setClearColor(0x05060a);
 
@@ -95,6 +95,9 @@ export function createEngine(canvas, level) {
     camera,
     shadowLights,
     setLevel,
+    setExposure: v => {
+      renderer.toneMappingExposure = v;
+    },
     start,
     onFrame: fn => hooks.push(fn)
   };

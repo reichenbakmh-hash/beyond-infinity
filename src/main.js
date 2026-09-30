@@ -1,10 +1,9 @@
 import * as THREE from 'three';
-import './style.css';
 import { game } from './core/game.js';
 import { store } from './core/store.js';
 import { createEvents } from './core/events.js';
 import { createEngine } from './core/engine.js';
-import { ORDER, resolveLevel, savedChoice, saveChoice } from './core/quality.js';
+import { ORDER, resolveLevel, savedChoice, saveChoice, EXPOSURES, savedExposure, saveExposure } from './core/quality.js';
 import { createAudio } from './core/audio.js';
 import { createInput } from './core/input.js';
 import { createPlayer } from './core/player.js';
@@ -28,6 +27,7 @@ function boot() {
   const touch = isTouchDevice();
   const canvas = document.getElementById('view');
   let choice = savedChoice();
+  let exposure = savedExposure();
   let input;
 
   const events = createEvents();
@@ -44,6 +44,7 @@ function boot() {
       onClose: () => {
         game.state = 'play';
         input.capture();
+        reclaim();
       },
       closeBag: () => closeBag()
     }
@@ -57,10 +58,22 @@ function boot() {
   engine.setLevel(resolveLevel(choice));
   room.sync();
 
+  engine.setExposure(EXPOSURES[exposure].value);
+
+  function reclaim() {
+    if (touch) return;
+    setTimeout(() => {
+      if (game.state === 'play' && document.pointerLockElement !== canvas) {
+        ui.hint('Clique dans la scène pour reprendre la souris.', 3200);
+      }
+    }, 300);
+  }
+
   const resume = () => {
     ui.closePause();
     game.state = 'play';
     input.capture();
+    reclaim();
   };
 
   function closeBag() {
@@ -128,6 +141,13 @@ function boot() {
     sound: () => audio.toggleMute(),
     hasMusic: audio.hasMusic(),
     music: () => audio.toggleMusic(),
+    brightLabel: 'Luminosité : ' + EXPOSURES[exposure].label,
+    bright: () => {
+      exposure = (exposure + 1) % EXPOSURES.length;
+      saveExposure(exposure);
+      engine.setExposure(EXPOSURES[exposure].value);
+      return 'Luminosité : ' + EXPOSURES[exposure].label;
+    },
     qualityLabel: 'Qualité : ' + choice,
     quality: () => {
       choice = ORDER[(ORDER.indexOf(choice) + 1) % ORDER.length];

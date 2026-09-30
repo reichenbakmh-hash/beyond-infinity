@@ -35,6 +35,7 @@ export function createUI({ audio, hooks }) {
     bSound: $('m-sound'),
     bMusic: $('m-music'),
     bQuality: $('m-quality'),
+    bBright: $('m-bright'),
     bFull: $('m-full'),
     bRestart: $('m-restart')
   };
@@ -219,6 +220,10 @@ export function createUI({ audio, hooks }) {
     el.bMusic.hidden = !h.hasMusic;
     el.bMusic.onclick = () => {
       el.bMusic.textContent = h.music();
+    };
+    el.bBright.textContent = h.brightLabel;
+    el.bBright.onclick = () => {
+      el.bBright.textContent = h.bright();
     };
     el.bQuality.textContent = h.qualityLabel;
     el.bQuality.onclick = () => {
